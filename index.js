@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const { Client } = require('ssh2');
+const {issue} = require("@actions/core/lib/command");
 
 const main = async() => {
     try {
@@ -12,9 +13,31 @@ const main = async() => {
         const token = core.getInput('token', { required: true });
         const octokit = new github.getOctokit(token);
 
-        const body = github.context.payload.comment.body.trim();
         const issue_number = github.context.payload.issue.number;
         const {owner, repo} = github.context.repo;
+
+        const pr = octokit.rest.pulls.get({
+            owner: owner,
+            repo: repo,
+            pull_number: issue_number
+        });
+
+        const baseRef = pr?.data?.base?.ref
+
+        octokit.rest.issues.createComment({
+            owner,
+            repo,
+            issue_number: issue_number,
+            body: `### Deployment Triggered 🚀
+             __${
+                github.context.actor
+            }__, started a deployment to SSH !
+
+      You can watch the progress [here](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}) 🔗
+
+      > Branche: \`${baseRef}\`
+    `
+        });
 
         const conn = new Client();
         conn.on('ready', () => {
