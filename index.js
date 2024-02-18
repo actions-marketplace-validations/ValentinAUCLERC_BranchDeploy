@@ -61,6 +61,8 @@ You can watch the progress [here](https://github.com/${github.context.repo.owner
                 username: username,
                 password: password
             });
+        } else {
+            console.log('nop');
         }
 
 
