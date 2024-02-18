@@ -62,7 +62,7 @@ You can watch the progress [here](https://github.com/${github.context.repo.owner
                 password: password
             });
         } else {
-            console.log('nop');
+            console.log(github.context.payload.comment.body);
         }
 
 
