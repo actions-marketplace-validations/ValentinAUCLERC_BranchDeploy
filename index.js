@@ -28,10 +28,11 @@ const main = async() => {
             owner,
             repo,
             issue_number: issue_number,
-            body: `### Deployment Triggered 🚀
-            __${github.context.actor}__, started a deployment to SSH !
-            You can watch the progress [here](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}) 🔗
-            > Branche: \`${baseRef}\``
+            body:
+`### Deployment Triggered 🚀
+__${github.context.actor}__, started a deployment to SSH !
+You can watch the progress [here](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}) 🔗
+> Branche: \`${baseRef}\``
         });
 
         const conn = new Client();
