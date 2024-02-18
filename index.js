@@ -30,6 +30,8 @@ const main = async() => {
                         body: `ceci
                         est un test`
                     });
+                }).on('close', (code) => {
+                    console.log('stream :: close\n', { code });
                 });
             });
         }).connect({
