@@ -9,6 +9,7 @@ const main = async() => {
         const port = core.getInput('ssh-port');
         const username = core.getInput('ssh-user');
         const password = core.getInput('ssh-pwd');
+        const script = core.getInput('ssh-script');
 
         const token = core.getInput('token', { required: true });
         const octokit = new github.getOctokit(token);
@@ -22,7 +23,7 @@ const main = async() => {
             pull_number: issue_number
         });
 
-        const baseRef = pr?.data?.base?.ref
+        console.log(pr);
 
         octokit.rest.issues.createComment({
             owner,
@@ -32,13 +33,13 @@ const main = async() => {
 `### Deployment Triggered 🚀
 __${github.context.actor}__, started a deployment to SSH !
 You can watch the progress [here](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}) 🔗
-> Branche: \`${baseRef}\``
+> Branche: \`\``
         });
 
         const conn = new Client();
         conn.on('ready', () => {
             console.log('SSH client :: ready');
-            conn.exec('./deploy.sh', (err, stream) => {
+            conn.exec(script, (err, stream) => {
                 if (err) throw err;
                 stream.on('data', (data) => {
                     console.log('STDOUT: ' + data);

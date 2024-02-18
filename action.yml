@@ -21,9 +21,9 @@ inputs:
   ssh-pwd:
     description: SSH password
     required: true
-outputs:
-  script_output:
-    description: 'The result of the SSH Script'
+  ssh-script:
+    description: SSH script
+    required: true
 runs:
   using: "node20"
   main: "index.js"
