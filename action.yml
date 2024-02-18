@@ -1,0 +1,17 @@
+name: "branch-deploy"
+description: "Enabling Branch Deployments through IssueOps with GitHub Actions"
+author: "Valentin AUCLERC"
+branding:
+  icon: 'git-branch'
+  color: 'gray-dark'
+inputs:
+  github_token:
+    description: The GitHub token used to create an authenticated client - Provided for you by default!
+    default: ${{ github.token }}
+    required: true
+outputs:
+  script_output:
+    description: 'The result of the SSH Script'
+runs:
+  using: "node20"
+  main: "dist/index.js"
