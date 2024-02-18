@@ -18,13 +18,10 @@ const main = async() => {
 
         const conn = new Client();
         conn.on('ready', () => {
-            console.log('Client :: ready');
-            conn.exec('uptime', (err, stream) => {
+            console.log('SSH client :: ready');
+            conn.exec('./deploy.sh', (err, stream) => {
                 if (err) throw err;
-                stream.on('close', (code, signal) => {
-                    console.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
-                    conn.end();
-                }).on('data', (data) => {
+                stream.on('data', (data) => {
                     console.log('STDOUT: ' + data);
                     octokit.rest.issues.createComment({
                         owner,
@@ -33,9 +30,6 @@ const main = async() => {
                         body: `ceci
                         est un test`
                     });
-                }).stderr.on('data', (data) => {
-                    console.log('STDERR: ' + data);
-                    core.setFailed(data)
                 });
             });
         }).connect({
