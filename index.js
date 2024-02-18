@@ -32,6 +32,7 @@ const main = async() => {
                     });
                 }).on('close', (code) => {
                     console.log('stream :: close\n', { code });
+                    conn.end();
                 });
             });
         }).connect({
