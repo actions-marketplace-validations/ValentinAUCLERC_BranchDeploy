@@ -23,7 +23,6 @@ const main = async() => {
             pull_number: issue_number
         });
 
-        console.log(pr);
 
         octokit.rest.issues.createComment({
             owner,
@@ -33,7 +32,7 @@ const main = async() => {
 `### Deployment Triggered 🚀
 __${github.context.actor}__, started a deployment to SSH !
 You can watch the progress [here](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}) 🔗
-> Branche: \`\``
+> Branche: \`${pr?.data?.base?.ref}\``
         });
 
         const conn = new Client();
