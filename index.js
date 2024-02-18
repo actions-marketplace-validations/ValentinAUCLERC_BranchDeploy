@@ -5,6 +5,7 @@ const { Client } = require('ssh2');
 const main = async() => {
     try {
         const host = core.getInput('ssh-host');
+        const port = core.getInput('ssh-port');
         const username = core.getInput('ssh-user');
         const password = core.getInput('ssh-pwd');
 
