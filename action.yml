@@ -1,4 +1,4 @@
-name: "branch-deploy"
+name: "ssh-branch-deploy"
 description: "Enabling Branch Deployments through IssueOps with GitHub Actions"
 author: "Valentin AUCLERC"
 branding:
