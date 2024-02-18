@@ -17,7 +17,7 @@ const main = async() => {
         const issue_number = github.context.payload.issue.number;
         const {owner, repo} = github.context.repo;
 
-        const pr = octokit.rest.pulls.get({
+        const pr = await octokit.rest.pulls.get({
             owner: owner,
             repo: repo,
             pull_number: issue_number
