@@ -5,7 +5,7 @@ branding:
   icon: 'git-branch'
   color: 'gray-dark'
 inputs:
-  github_token:
+  token:
     description: The GitHub token used to create an authenticated client - Provided for you by default!
     default: ${{ github.token }}
     required: true
