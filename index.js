@@ -38,10 +38,10 @@ const main = async() => {
                 });
             });
         }).connect({
-            host: '192.168.100.100',
-            port: 22,
-            username: 'frylock',
-            password: 'aa'
+            host: host,
+            port: port,
+            username: username,
+            password: password
         });
 
 
