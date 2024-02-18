@@ -41,7 +41,7 @@ You can watch the progress [here](https://github.com/${github.context.repo.owner
 > Branch: \`${pr?.data?.base?.ref}\``);
             var paramString = triggerComment.replace(commandPattern, '');
             if(/(-\w* \S*)\s*/g.test(paramString) === false && paramString !== '') {
-                createComment('👮 Due to security policy, you can only use parameters this way : `-param1 value1 -param2 value2`')
+                createComment('👮 Due to security policy, you can only use parameters this way : `-param1 value1 -param2 value2...`')
             } else {
                 const conn = new Client();
                 conn.on('ready', () => {
