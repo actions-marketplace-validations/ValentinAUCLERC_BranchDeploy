@@ -22,7 +22,7 @@ const main = async() => {
                 owner,
                 repo,
                 issue_number: issue_number,
-                body: body
+                body: 'test'
             });
         }
 
