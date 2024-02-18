@@ -24,7 +24,7 @@ const main = async() => {
         });
 
         console.log(github.context);
-        if(github.context.comment.body.match('/\\.deploy\\s+(.+)/')) {
+        if(github.context.payload.comment.body.match('/\\.deploy\\s+(.+)/')) {
             octokit.rest.issues.createComment({
                 owner,
                 repo,
