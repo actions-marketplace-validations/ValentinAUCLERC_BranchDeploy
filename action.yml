@@ -18,7 +18,7 @@ inputs:
   ssh-user:
     description: SSH user
     required: true
-  ssh-password:
+  ssh-pwd:
     description: SSH password
     required: true
 outputs:
