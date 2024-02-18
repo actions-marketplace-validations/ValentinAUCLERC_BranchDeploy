@@ -9,6 +9,18 @@ inputs:
     description: The GitHub token used to create an authenticated client - Provided for you by default!
     default: ${{ github.token }}
     required: true
+  ssh-host:
+    description: SSH host
+    required: true
+  ssh-port:
+    description: SSH port
+    required: true
+  ssh-user:
+    description: SSH user
+    required: true
+  ssh-password:
+    description: SSH password
+    required: true
 outputs:
   script_output:
     description: 'The result of the SSH Script'
