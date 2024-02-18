@@ -23,7 +23,7 @@ const main = async() => {
             pull_number: issue_number
         });
 
-        console.log(github.context);
+
         if(github.context.payload.comment.body.match('/\\.deploy\\s+(.+)/')) {
             octokit.rest.issues.createComment({
                 owner,
