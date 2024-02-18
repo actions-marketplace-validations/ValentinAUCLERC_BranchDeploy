@@ -18,9 +18,8 @@ const main = async() => {
             owner,
             repo,
             issue_number: issue_number,
-            body: `
-                    test \n
-                  `
+            body: `ceci
+            est un test`
         })
 
 
