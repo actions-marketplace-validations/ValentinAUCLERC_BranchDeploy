@@ -51,7 +51,7 @@ You can watch the progress [here](https://github.com/${github.context.repo.owner
                         if (err) throw err;
                         stream.on('data', (data) => {
                             console.log('STDOUT: ' + data);
-                            createComment(data);
+                            createComment('ok');
                         }).on('close', (code) => {
                             console.log('stream :: close\n', { code });
                             conn.end();
