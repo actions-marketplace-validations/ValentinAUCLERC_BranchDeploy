@@ -18,11 +18,12 @@ const main = async() => {
         const {owner, repo} = github.context.repo;
 
         function createComment(body) {
+            console.log('ENVOI:'+body);
             octokit.rest.issues.createComment({
                 owner,
                 repo,
                 issue_number: issue_number,
-                body: 'test'
+                body: body
             });
         }
 
@@ -35,6 +36,10 @@ const main = async() => {
         var commandPattern = /^\.deploy\s*/;
         var triggerComment = github.context.payload.comment.body;
         if(commandPattern.test(triggerComment)) {
+            createComment(`### Deployment Triggered 🚀
+__${github.context.actor}__, started a deployment to SSH !
+You can watch the progress [here](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}) 🔗
+> Branch: \`${pr?.data?.base?.ref}\``);
             var paramString = triggerComment.replace(commandPattern, '');
             if(/(-\w* \S*)\s*/g.test(paramString) === false && paramString !== '') {
                 createComment('👮 Due to security policy, blabla')
