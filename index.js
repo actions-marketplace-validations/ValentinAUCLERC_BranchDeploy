@@ -24,43 +24,46 @@ const main = async() => {
         });
 
         console.log(github.context);
-
-        octokit.rest.issues.createComment({
-            owner,
-            repo,
-            issue_number: issue_number,
-            body:
+        if(github.context.comment.body.match('/\\.deploy\\s+(.+)/') {
+            octokit.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: issue_number,
+                body:
 `### Deployment Triggered 🚀
 __${github.context.actor}__, started a deployment to SSH !
 You can watch the progress [here](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${process.env.GITHUB_RUN_ID}) 🔗
 > Branch: \`${pr?.data?.base?.ref}\``
-        });
-
-        const conn = new Client();
-        conn.on('ready', () => {
-            console.log('SSH client :: ready');
-            conn.exec(script, (err, stream) => {
-                if (err) throw err;
-                stream.on('data', (data) => {
-                    console.log('STDOUT: ' + data);
-                    octokit.rest.issues.createComment({
-                        owner,
-                        repo,
-                        issue_number: issue_number,
-                        body: `ceci
-                        est un test`
-                    });
-                }).on('close', (code) => {
-                    console.log('stream :: close\n', { code });
-                    conn.end();
-                });
             });
-        }).connect({
-            host: host,
-            port: port,
-            username: username,
-            password: password
-        });
+
+            const conn = new Client();
+            conn.on('ready', () => {
+                console.log('SSH client :: ready');
+                conn.exec(script, (err, stream) => {
+                    if (err) throw err;
+                    stream.on('data', (data) => {
+                        console.log('STDOUT: ' + data);
+                        octokit.rest.issues.createComment({
+                            owner,
+                            repo,
+                            issue_number: issue_number,
+                            body: `ceci
+                        est un test`
+                        });
+                    }).on('close', (code) => {
+                        console.log('stream :: close\n', { code });
+                        conn.end();
+                    });
+                });
+            }).connect({
+                host: host,
+                port: port,
+                username: username,
+                password: password
+            });
+        }
+
+
 
 
     } catch(error) {
